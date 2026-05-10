@@ -1,8 +1,26 @@
+#import statements for necessary libraries and modules.
 import timm
 import torch
 import torch.nn as nn
 
 class MRNetViT(nn.Module):
+    """
+    MRNetViT:
+    -----------
+    Vision Transformer (ViT)-based architecture for MRI classification.
+
+    This model:
+    1. Extracts features from each MRI slice using a pretrained ViT.
+    2. Learns slice importance using an attention-based pooling mechanism.
+    3. Aggregates important slice features into a single representation.
+    4. Performs final classification.
+
+    Expected Input Shape:
+        (batch_size, num_slices, 3, 224, 224)
+
+    Output:
+        logits of shape (batch_size, num_classes)
+    """
     def __init__(self, pretrained: bool = True):
         super(MRNetViT, self).__init__()
         # Feature extractor
@@ -40,7 +58,7 @@ class MRNetViT(nn.Module):
         return logits
 
     def get_attention_weights(self, x):
-        """Returns the slice-wise importance weights."""
+        #Function which returns the slice-wise importance weights.
         batch_size, num_slices, c, h, w = x.shape
         x = x.view(-1, c, h, w)
         with torch.no_grad():
@@ -50,12 +68,11 @@ class MRNetViT(nn.Module):
         return attn_weights
 
     def get_spatial_attention(self, x_slice):
-        """Extracts the self-attention map from the last layer of ViT for a single slice."""
+        #Function which extracts the self-attention map from the last layer of ViT for a single slice.
         # x_slice: (1, 3, 224, 224)
         # We use timm's internal attention storage if available, or just hook it.
         # For simplicity with timm's ViT, we can access the last block's attention.
         
-        # Ensure we have the attention weights
         # vit_small_patch16_224 has blocks[0...11]
         last_block = self.vit.blocks[-1]
         
@@ -85,8 +102,10 @@ class MRNetViT(nn.Module):
                 # Average across heads and take the CLS token's attention to other tokens
                 cls_attn = attn[:, :, 0, 1:].mean(dim=1) # (B, N-1)
                 return cls_attn
+            #pass through transformer block
             x = block(x)
         return None
 
 def get_model(pretrained=True):
+    #Utility function to create the MRNetViT model which returns an instance of the model with the option to load pretrained weights.
     return MRNetViT(pretrained=pretrained)
