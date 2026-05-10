@@ -1,0 +1,7 @@
+image,ground_truth,p_abnormal,p_acl,p_meniscal,pred_abnormal,pred_acl,pred_meniscal
+acl_tear_1.jpg.jpeg,ACL,0.1254,0.2449,0.2681,0,0,0
+acl_tear_2.jpeg,ACL,0.9864,0.4209,0.8503,1,0,1
+meniscal_tear_1.jpg.jpeg,Meniscal,0.9917,0.3162,0.6175,1,0,1
+meniscal_tear_2.jpg.jpeg,Meniscal,0.9756,0.8431,0.9018,1,1,1
+normal_knee_1.jpg.jpeg,Normal,0.0910,0.1846,0.3272,0,0,0
+normal_knee_2.jpg.jpeg,Normal,0.1783,0.3445,0.1136,0,0,0
