@@ -24,10 +24,11 @@ def train(args):
         batch_size=args.batch_size, 
         plane=args.plane, 
         num_workers=args.num_workers,
-        num_slices=args.num_slices
+        num_slices=args.num_slices,
+        use_augmentation=not args.no_aug
     )
 
-    model = get_model(pretrained=True).to(device)
+    model = get_model(pretrained=not args.no_pretrain).to(device)
 
     # Differential learning rates: backbone vs head
     # Feature extractor (ViT) needs to be stable, head learns from scratch
@@ -117,4 +118,6 @@ if __name__ == "__main__":
     parser.add_argument('--lr', type=float, default=2e-4) # Higher head LR
     parser.add_argument('--num_workers', type=int, default=4)
     parser.add_argument('--save_path', type=str, default='best_model.pth')
+    parser.add_argument('--no_aug', action='store_true', help='Disable data augmentation')
+    parser.add_argument('--no_pretrain', action='store_true', help='Disable ImageNet pre-training')
     train(parser.parse_args())

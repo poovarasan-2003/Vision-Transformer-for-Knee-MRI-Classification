@@ -68,16 +68,24 @@ class MRNetDataset(Dataset):
         labels = torch.from_numpy(self.labels[idx]).float()
         return sequence_tensor, labels
 
-def get_data_loaders(data_root: str, batch_size: int = 1, plane: str = 'sagittal', num_workers: int = 2, num_slices: int = 24) -> Tuple[DataLoader, DataLoader]:
-    train_transform = transforms.Compose([
-        transforms.ToPILImage(),
-        transforms.Resize((224, 224)),
-        transforms.RandomHorizontalFlip(),
-        transforms.RandomAffine(degrees=15, translate=(0.05, 0.05)),
-        transforms.GaussianBlur(kernel_size=3), # SOTA: Handle MRI blur
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
+def get_data_loaders(data_root: str, batch_size: int = 1, plane: str = 'sagittal', num_workers: int = 2, num_slices: int = 24, use_augmentation: bool = True) -> Tuple[DataLoader, DataLoader]:
+    if use_augmentation:
+        train_transform = transforms.Compose([
+            transforms.ToPILImage(),
+            transforms.Resize((224, 224)),
+            transforms.RandomHorizontalFlip(),
+            transforms.RandomAffine(degrees=15, translate=(0.05, 0.05)),
+            transforms.GaussianBlur(kernel_size=3), # SOTA: Handle MRI blur
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
+    else:
+        train_transform = transforms.Compose([
+            transforms.ToPILImage(),
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
 
     val_transform = transforms.Compose([
         transforms.ToPILImage(),
