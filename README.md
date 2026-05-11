@@ -130,8 +130,14 @@ python run_ood_batch.py --model_path best_model.pth --image_dir ood_images/ --au
 
 ---
 
-## 8. References
+## 9. Contributors & Collaborative Ownership
 
-1.  **MRNet:** Bien et al., "Deep-learning-assisted diagnosis for knee magnetic resonance imaging: Development and retrospective validation of MRNet," *PLOS Medicine*, 2018.
-2.  **ViT:** Dosovitskiy et al., "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale," *ICLR*, 2021.
-3.  **Attention Aggregation:** Ilse et al., "Attention-based Deep Multiple Instance Learning," *ICML*, 2018.
+This project was developed as a cohesive group effort, with all members participating in the full lifecycle of the research, implementation, and documentation. While every team member maintains a comprehensive understanding of the entire MRNetViT pipeline, specific leads were assigned to ensure rigorous validation of key modules:
+
+*   **Kishore Damodharan:** Led the architectural design of the **Data Preprocessing** pipeline, including volumetric sampling strategies and normalization protocols.
+*   **Deepakraj Rajmohan:** Managed the **Model Building** and refinement of the Vision Transformer backbone and Attention-Based Aggregator.
+*   **Poovarasan Pariselvam:** Orchestrated the **Training Pipeline**, optimization strategies, and differential learning rate configurations.
+*   **Rohidh Govindan Choodamani:** Directed the **Evaluation Pipeline**, metric generation, and comprehensive validation against the MRNet baseline.
+*   **Sriraaj Anandh:** Headed the **Visualization & OOD Robustness** testing, including attention map generation and external clinical data inference.
+
+All contributors participated equally in the experimental design, ablation studies, and the final technical report.
