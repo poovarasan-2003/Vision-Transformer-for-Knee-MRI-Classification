@@ -358,7 +358,7 @@ def plot_confusion_matrix(probs: np.ndarray, labels: np.ndarray,
         linecolor='gray'
     )
 
-    ax.set_title(f'Confusion Matrix - {task_name}', fontsize=14, fontweight='bold', pad=12)
+    ax.set_title(f'Confusion Matrix - {task_name.upper() if len(task_name) <= 3 else task_name.capitalize()}', fontsize=14, fontweight='bold', pad=12)
     ax.set_xlabel('Predicted Label', fontsize=11)
     ax.set_ylabel('True Label', fontsize=11)
 

@@ -1,9 +1,9 @@
 {
-    "Abnormal": {
-        "Accuracy": 0.8917,
-        "Sensitivity": 0.9579,
-        "Specificity": 0.64,
-        "F1-Score": 0.9333,
-        "ROC-AUC": 0.9267
+    "Acl": {
+        "Accuracy": 0.8,
+        "Sensitivity": 0.7593,
+        "Specificity": 0.8333,
+        "F1-Score": 0.7736,
+        "ROC-AUC": 0.8979
     }
 }
