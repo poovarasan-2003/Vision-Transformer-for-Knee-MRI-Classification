@@ -45,11 +45,10 @@ from model import get_model
 # Supported image extensions
 IMAGE_EXTS = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.tif', '.webp'}
 
-# MRNet validation AUC baseline (from your trained model — update these after training)
 MRNET_VAL_AUC = {
-    'Abnormal': 0.871,
-    'ACL':      0.834,
-    'Meniscal': 0.798,
+    'Abnormal': 0.927,
+    'ACL':      0.898,
+    'Meniscal': 0.739,
 }
 
 CONDITIONS = ['Abnormal', 'ACL', 'Meniscal']
